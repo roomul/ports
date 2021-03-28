@@ -1,0 +1,14 @@
+yajl
+xcb-util-cursor
+xcb-util-keysyms
+xcb-util-xrm
+startup-notification
+pango
+libxkbcommon
+libev
+freetype-harfbuzz
+autoconf make
+automake make
+libtool make
+meson make
+pcre

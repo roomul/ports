@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+sed -i 's|\"/usr/local/lib/libswmhack.so\"|\"libswmhack.so\"|' spectrwm.c
+
+cd linux
+make PREFIX=/usr
+make PREFIX=/usr DESTDIR="$1" install
+install -Dm644 spectrwm.desktop "$1/usr/share/xsessions/spectrwm.desktop"
+cd ..
+install -Dm644 spectrwm.conf "$1/etc/spectrwm.conf"
+install -Dm755 screenshot.sh "$1/usr/share/spectrwm/screenshot.sh"
+install -Dm755 baraction.sh  "$1/usr/share/spectrwm/baraction.sh"
+
+mkdir -p "$1/etc/spectrwm"
+cp spectrwm_*.conf "$1/etc/spectrwm/"

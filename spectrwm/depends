@@ -1,0 +1,9 @@
+dmenu
+xcb-util
+xcb-util-wm
+xcb-util-keysyms
+xrandr
+libXft
+libXcursor
+terminus-font
+libXt make
