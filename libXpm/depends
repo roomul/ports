@@ -1,0 +1,7 @@
+autoconf
+automake
+libtool
+xorgproto
+libXext
+libXt
+gettext

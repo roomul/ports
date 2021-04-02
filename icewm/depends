@@ -1,0 +1,12 @@
+autoconf make
+alsa-lib
+lzip make
+libXft
+libXinerama
+libXpm
+libjpeg-turbo
+libXrandr
+libXcomposite
+imlib2
+fribidi
+gdk-pixbuf
