@@ -1,0 +1,21 @@
+Xft.dpi:			94
+Xft.antialias:			true
+Xft.hinting:			medium
+
+*.background:			#000000
+*.foreground:			#fcfcfc
+
+URxvt.font:			xft:Liberation Mono:size=10
+
+URxvt.scrollBar:		true
+URxvt.scrollBar_right:		true
+URxvt.scrollstyle:		plain
+URxvt.scrollTtyOutput:		false
+URxvt.scrollWithBuffer:		true
+URxvt.scrollTtyKeypress:	true
+
+URxvt.cursorUnderline:		true
+
+URxvt.geometry:			90x28
+
+Xcursor.theme:			Neutral++

@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+cargo build --release
+
+install -Dm755 target/release/leftwm -t "$1/usr/bin"
+install -Dm755 target/release/leftwm-worker -t "$1/usr/bin"
+install -Dm755 target/release/leftwm-state -t "$1/usr/bin"
+
+install -d "$1/usr/share/leftwm"
+cp -R themes "$1/usr/share/leftwm/"
+install -Dm644 leftwm.desktop "$1/usr/share/xsessions/leftwm.desktop"

@@ -1,1 +1,1 @@
-# KISS ports
+# My KISS Linux ports (package)

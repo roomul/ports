@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -ef
+
+ROOT_APP="ssu sudo"
+
+log(){
+	printf " -> $1 \n"
+}
+
+die(){
+	log "ERROR: $1"
+	exit 1
+}
+
+main(){
+	for run_as in ${ROOT_APP} ; do
+		if [ "`which $run_as`" != "" ]; then
+			RUN_AS_ROOT="$run_as"
+		fi
+	done
+
+	if [ "$RUN_AS_ROOT" = "" ]; then
+		die "Not unpriveleged (ssu, sudo: not found.)"
+	fi
+
+	if [ "`lsmod | grep ath5k`" = "" ]; then
+		log "Load ath5k module"
+		$RUN_AS_ROOT modprobe ath5k
+		sleep 1s
+	fi
+
+
+	$RUN_AS_ROOT killall dhcpcd || true >/dev/null
+	$RUN_AS_ROOT killall wpa_supplicant || true >/dev/null
+	sleep 1s
+
+	log "Authentication to WLAN"
+	$RUN_AS_ROOT wpa_supplicant -Dnl80211 -iwlp7s0 -c<(wpa_passphrase ASUS 04071979) -B 
+	
+	log "Add ip address"
+	$RUN_AS_ROOT dhcpcd wlp7s0
+
+	exit 0
+}
+
+main "$@"
+

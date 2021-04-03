@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+# Amend install path to '/usr'.
+sed -i'' "s#/usr/local#/usr#" config.mk
+
+patch -p1 < 6.2.diff
+patch -p1 < 6.2-urxvt.diff
+patch -p1 < 6.2-awesome-ttf.diff
+
+make
+make DESTDIR="$1" install

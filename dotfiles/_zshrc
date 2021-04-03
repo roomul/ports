@@ -1,0 +1,90 @@
+#
+#
+
+# bug on qemu
+export NO_AT_BRIDGE=1
+
+export TERM="xterm-256color"
+
+export HISTFILE="$HOME/.zsh_history"
+export SAVEHIST=5000
+export HISTSIZE=$SAVEHIST
+
+autoload -Uz colors compinit promptinit
+colors
+compinit
+promptinit;
+
+setopt prompt_subst
+setopt autocd
+
+alias ls="ls --color=auto"
+alias ll="ls -lhG"
+alias open="xdg-open"
+
+# void
+if [ -f /etc/os-release ]; then
+	. /etc/os-release
+	if [ "$DISTRIB_ID" = "void" ]; then
+		alias xrm="sudo xbps-remove"
+	fi
+	unset NAME ID DISTRIB_ID PRETTY_NAME
+fi
+
+umask 022
+
+zstyle ':completion:*' menu select
+
+# key bindings
+bindkey  "^[[H"   beginning-of-line # home key
+bindkey  "^[[F"   end-of-line # end key
+bindkey  "^[[3~"  delete-char
+bindkey  "^[3;5~" delete-char
+bindkey  "e[5~"   beginning-of-history
+bindkey  "e[6~"   end-of-history
+bindkey  "e[3~"   delete-char
+bindkey  "e[2~"   quoted-insert
+bindkey  "e[5C"   forward-word
+bindkey  "eOc"    emacs-forward-word
+bindkey  "e[5D"   backward-word
+bindkey  "eOd"    emacs-backward-word
+bindkey  "ee[C"   forward-word
+bindkey  "ee[D"   backward-word
+bindkey  "^H"     backward-delete-word
+# for rxvt
+bindkey  "e[8~"   end-of-line
+bindkey  "e[7~"   beginning-of-line
+# for non RH/Debian xterm, can't hurt for RH/DEbian xterm
+bindkey  "eOH"    beginning-of-line
+bindkey  "eOF"    end-of-line
+# for freebsd console
+bindkey  "e[H"    beginning-of-line
+bindkey  "e[F"    end-of-line
+# completion in the middle of a line
+bindkey  '^i'     expand-or-complete-prefix
+
+# Set xterm title
+case $TERM in (xterm*|rxvt)
+				precmd () { print -Pn "\e]0;%m: %~\a" }
+				preexec () { print -Pn "\e]0;%m: $1\a" }
+				;;
+esac
+
+git_prompt() {
+  BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\(.*\)/\1/')
+
+  if [ ! -z $BRANCH ]; then
+    echo -n "%B%F{cyan}$BRANCH"
+
+    if [ ! -z "$(git status --short)" ]; then
+      echo " %B%F{red}\0xE2\0x9C\0x98"
+    else
+      echo " %B%F{green}\0xE2\0x9C\0x94"    
+    fi
+  fi
+}
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+PROMPT="%{$fg_bold[blue]%}%~%{$reset_color%} %{$fg_bold[green]%}>%{$reset_color%} "
+RPROMPT='$(git_prompt)%{$reset_color%}%F{reset}'
