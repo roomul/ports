@@ -1,0 +1,32 @@
+
+if [ -f "/etc/profile" ]; then
+	. /etc/profile
+fi
+
+if [ -f "$HOME/.bashrc" ]; then
+	. $HOME/.bashrc
+fi
+
+## kiss 
+DB_DIR="$HOME/repos"
+if [ -d "${DB_DIR}" ]; then
+	CFLAGS="-march=x86-64 -mtune=generic -pipe -Os"
+	CXXFLAGS="$CFLAGS"
+	MAKEFLAGS="-j$(expr `nproc` + 1 || echo 1)"
+
+	export CFLAGS CXXFLAGS MAKEFLAGS
+
+	export KISS_PATH=''
+	KISS_PATH=$KISS_PATH:$DB_DIR/repo/core
+	KISS_PATH=$KISS_PATH:$DB_DIR/repo/extra
+	KISS_PATH=$KISS_PATH:$DB_DIR/repo/xorg
+	KISS_PATH=$KISS_PATH:$DB_DIR/community/community
+fi
+
+## exec startx without dm
+if shopt -q login_shell; then
+	[[ -t 0 && $(tty) == /dev/tty1 && ! $DISPLAY ]] && exec startx
+else
+	printf " :: ERROR: The startx in .bash_profile filed. \n"
+	exit 1
+fi
