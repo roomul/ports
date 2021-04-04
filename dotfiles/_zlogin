@@ -1,0 +1,22 @@
+
+## kiss 
+DB_DIR="$HOME/repos"
+if [ -d "${DB_DIR}" ]; then
+	CFLAGS="-march=x86-64 -mtune=generic -pipe -Os"
+	CXXFLAGS="$CFLAGS"
+	MAKEFLAGS="-j$(expr `nproc` + 1 || echo 1)"
+
+	export CFLAGS CXXFLAGS MAKEFLAGS
+
+	export KISS_PATH=''
+	KISS_PATH=$KISS_PATH:$DB_DIR/repo/core
+	KISS_PATH=$KISS_PATH:$DB_DIR/repo/extra
+	KISS_PATH=$KISS_PATH:$DB_DIR/repo/xorg
+	KISS_PATH=$KISS_PATH:$DB_DIR/community/community
+fi
+
+# exec startx without dm
+if [[ -z $DISPLAY ]] && (( $EUID != 0 )) {
+	[[ ${TTY/tty} != $TTY ]] && (( ${TTY:8:1} <= 3 )) &&
+		startx 1>~/.xsession-errors 2>&1
+}
