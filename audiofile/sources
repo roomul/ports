@@ -1,0 +1,13 @@
+https://audiofile.68k.org/audiofile-0.3.6.tar.gz
+patches/01_gcc6.patch
+patches/02_hurd.patch
+patches/03_CVE-2015-7747.patch
+patches/04_clamp-index-values-to-fix-index-overflow-in-IMA.cpp.patch
+patches/05_Always-check-the-number-of-coefficients.patch
+patches/06_Check-for-multiplication-overflow-in-MSADPCM-decodeSam.patch
+patches/07_Check-for-multiplication-overflow-in-sfconvert.patch
+patches/08_Fix-signature-of-multiplyCheckOverflow.-It-returns-a-b.patch
+patches/09_Actually-fail-when-error-occurs-in-parseFormat.patch
+patches/10_Check-for-division-by-zero-in-BlockCodec-runPull.patch
+patches/11_CVE-2018-13440.patch
+patches/12_CVE-2018-17095.patch

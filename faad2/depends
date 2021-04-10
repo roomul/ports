@@ -1,0 +1,4 @@
+alsa-lib
+autoconf make
+automake make
+libtool make

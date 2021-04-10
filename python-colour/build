@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+sh ./autogen.sh
+python setup.py install --root="$1" 
