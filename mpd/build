@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+meson setup build \
+	--prefix=/usr \
+	--sysconfdir=/etc/mpd \
+	--buildtype=plain \
+	-Dmpcdec=disabled \
+	-Ddocumentation=disabled
+
+meson compile -C build -j 1
+meson install -C build
