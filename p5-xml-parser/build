@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-perl Makefile.PL
-make OPTIMIZE="$CFLAGS"
-make DESTDIR="$1" install
