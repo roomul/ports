@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+cat << EOF
+i3pystatus: status panel for i3
+
+bar(){
+    status_command:    python <path to>/panel.py
+    position           top
+    workspace_buttons: yes
+}
+
+panel.py
+
+status = Status()
+
+status.register("clock",
+    format="%a %-d %b %X",)
+
+status.register("load")
+
+status.run()
+
+EOF
