@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+autoreconf -f -i
+mkdir build && cd build
+../configure \
+	--prefix=/usr \
+	--disable-sanitizers \
+	--disable-pulseaudio
+make
+make DESTDIR="$1" install

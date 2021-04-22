@@ -1,0 +1,8 @@
+yajl
+alsa-lib
+libconfuse
+libnl
+autoconf make
+automake make
+libtool make
+asciidoc make
