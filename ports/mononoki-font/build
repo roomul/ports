@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-install -d "$1/usr/share/fonts/TTF"
-
-find . -type f -name '*.ttf' -exec cp {} $1/usr/share/fonts/TTF/ \;

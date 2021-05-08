@@ -1,8 +1,0 @@
-#!/bin/sh -e
-
-./configure --prefix=/usr \
-	--sysconfdir=/etc \
-	--enable-gtk3
-
-make
-make DESTDIR="$1" install

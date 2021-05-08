@@ -1,6 +1,0 @@
-libXinerama
-libxcb
-xcb-util
-xcb-util-renderutil
-libX11
-perl make
