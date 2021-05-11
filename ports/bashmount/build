@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+install -Dm755 bashmount      "$1/usr/bin/bashmount"
+install -Dm644 bashmount.1    "$1/usr/share/man/man1/bashmount.1"
+install -Dm644 bashmount.conf "$1/etc/bashmount.conf"
