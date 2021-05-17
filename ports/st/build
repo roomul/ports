@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+patch -p1 < st-scrollback-0.8.4.diff
+
+sed -i 's|cursorshape = 2|cursorshape = 4|g' config.def.h
+sed -i 's|Liberation Mono|Monospace|g' config.def.h
+
+# Install terminfo to right location.
+export TERMINFO=$1/usr/share/terminfo
+mkdir -p "$TERMINFO"
+
+make
+make PREFIX=/usr DESTDIR="$1" install
